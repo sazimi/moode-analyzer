@@ -1,0 +1,29 @@
+<ActionBar title="Mood analyzer" class="action-bar">
+</ActionBar>
+
+<TabView>
+    <StackLayout *tabItem="{title: 'Face '}">
+        <ScrollView>
+            <StackLayout>
+                <Button text="Take aas picture! 📷" class="btn btn-primary"
+                    marginTop="20" (tap)="runFaceDetect()">
+                </Button>
+                <Image [src]="pictureFromCamera" width="100%"></Image>
+                <Label ng-if="result.length > 0" [text]="result.length + ' face(s) been detected'"
+                    textWrap="true"> </Label>
+                <Label [text]="result | json" textWrap="true"></Label>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+    <StackLayout *tabItem="{title: 'Emotion'}">
+        <Label text="Result" class="h1 text-center"></Label>
+        <GridLayout rows="*" height="1000px">
+            <RadCartesianChart row="0">
+                <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>
+                <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+                <BarSeries tkCartesianSeries [items]="dataSource"
+                    categoryProperty="emoji" valueProperty="count"></BarSeries>
+            </RadCartesianChart>
+        </GridLayout>
+    </StackLayout>
+</TabView>
